@@ -8,8 +8,6 @@ import 'package:geocoder/geocoder.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:location/location.dart';
 
-
-
 class AuthProvider extends ChangeNotifier {
   File image;
   bool isPicAvailable = false;
@@ -20,9 +18,9 @@ class AuthProvider extends ChangeNotifier {
   String email;
   String error = '';
   String placeName;
-  bool loading =false;
+  bool loading = false;
   CollectionReference _Boys =
-        FirebaseFirestore.instance.collection('deliveryboys');
+      FirebaseFirestore.instance.collection('deliveryboys');
   Future<File> getImage() async {
     final picker = ImagePicker();
     final pickedFile =
@@ -41,6 +39,7 @@ class AuthProvider extends ChangeNotifier {
   getemail(email) {
     this.email = email;
   }
+
   isloading() {
     this.loading = true;
     notifyListeners();
@@ -137,7 +136,9 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     UserCredential userCredential;
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email).whenComplete((){});
+      await FirebaseAuth.instance
+          .sendPasswordResetEmail(email: email)
+          .whenComplete(() {});
     } on FirebaseAuthException catch (e) {
       this.error = e.code;
       notifyListeners();
@@ -169,8 +170,9 @@ class AuthProvider extends ChangeNotifier {
       'location': GeoPoint(this.shopLatitude, this.shopLongtitude),
       'imageUrl': url,
       'accountVerified': false,
-    }).whenComplete((){Navigator.pushNamed(
-                                            context, HomeScreen.id);} );
+    }).whenComplete(() {
+      Navigator.pushNamed(context, HomeScreen.id);
+    });
     return null;
   }
 }

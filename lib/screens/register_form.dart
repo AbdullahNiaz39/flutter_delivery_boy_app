@@ -298,12 +298,9 @@ class _RegistorFormState extends State<RegistorForm> {
                                       password: password,
                                       context: context,
                                     );
-                                      setState(() {
+                                    setState(() {
                                       _isloading = false;
                                     });
-
-                                   
-                                   
                                   } else {
                                     errorMessage(
                                         "Failed to Upload Shop Picture");
@@ -321,7 +318,7 @@ class _RegistorFormState extends State<RegistorForm> {
                       color: Theme.of(context).primaryColor,
                       shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(30.0))),
-                     Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FlatButton(

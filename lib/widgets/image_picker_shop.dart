@@ -43,7 +43,7 @@ class _ImagePickerOfShopState extends State<ImagePickerOfShop> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Icon(Icons.camera_alt_outlined),
-                        Text('Shop Image'),
+                        Text('Profile pic'),
                       ],
                     ))
                   : Image.file(
