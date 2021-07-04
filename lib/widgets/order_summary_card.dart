@@ -42,44 +42,11 @@ class _OrderSummaryCardState extends State<OrderSummaryCard> {
         children: [
           ListTile(
             horizontalTitleGap: 0,
-            leading: Image.network(
-              widget.document.data()['deliveryboy']['image'],
-            ),
-            title: Column(
-              children: [
-                Text(
-                  widget.document.data()['deliveryboy']['name'],
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: _orderServices.statusColor(widget.document),
-                  ),
-                ),
-              ],
-            ),
-            subtitle: Center(
-              child: Text(
-                widget.document.data()['deliveryboy']['email'],
-                style: TextStyle(fontSize: 12),
-              ),
-            ),
-            trailing: CircleAvatar(
-              backgroundColor: Colors.white,
-              radius: 14,
-              child: Icon(
-                Icons.delivery_dining,
-                size: 18,
-                color: _orderServices.statusColor(widget.document),
-              ),
-            ),
-          ),
-          ListTile(
-            horizontalTitleGap: 0,
             leading: CircleAvatar(
               backgroundColor: Colors.white,
               radius: 14,
               child: Icon(
-                CupertinoIcons.square_list,
+                Icons.delivery_dining,
                 size: 18,
                 color: _orderServices.statusColor(widget.document),
               ),

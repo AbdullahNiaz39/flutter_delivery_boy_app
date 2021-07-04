@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery_boy_app/providers/auth_provider.dart';
+import 'package:flutter_delivery_boy_app/screens/drawerScreen.dart';
 import 'package:flutter_delivery_boy_app/screens/forget_password_screen.dart';
 import 'package:flutter_delivery_boy_app/screens/home_screen.dart';
 import 'package:flutter_delivery_boy_app/screens/register_screen.dart';
@@ -198,7 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                               'successfully Login')
                                           .then((value) {
                                         Navigator.pushReplacementNamed(
-                                            context, HomeScreen.id);
+                                            context, DrawerScreen.id);
                                       });
                                       // setState(() {
                                       //   _isloading = false;

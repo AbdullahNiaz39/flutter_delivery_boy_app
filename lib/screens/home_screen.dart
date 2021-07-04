@@ -2,6 +2,7 @@ import 'package:chips_choice/chips_choice.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_delivery_boy_app/screens/login_screen.dart';
 
 import 'package:flutter_delivery_boy_app/services/firebase_services.dart';
@@ -9,6 +10,9 @@ import 'package:flutter_delivery_boy_app/widgets/order_summary_card.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home-screen';
+  final DocumentSnapshot document;
+
+  HomeScreen({Key key, this.document}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -17,6 +21,43 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   User _user = FirebaseAuth.instance.currentUser;
   FirebaseServices _services = FirebaseServices();
+
+  // @override
+  // void initState() {
+  //   _services.validateUser(widget.document.data()['userId']).then((value) {
+  //     if (value != null) {
+  //       setState(() {
+  //         _customer = value;
+  //       });
+  //     } else {
+  //       print('No Data');
+  //     }
+  //   });
+  //   super.initState();
+  // }
+
+  DocumentSnapshot _customer;
+
+  // @override
+  // void initState() {
+  //   getData();
+  //   super.initState();
+  // }
+
+  // User user = FirebaseAuth.instance.currentUser;
+  // DocumentSnapshot vendorData;
+
+  // Future<DocumentSnapshot> getData() async {
+  //   DocumentSnapshot result = await FirebaseFirestore.instance
+  //       .collection('deliveryboys')
+  //       .doc(user.uid)
+  //       .get();
+  //   setState(() {
+  //     vendorData = result;
+  //   });
+  //   return result;
+  // }
+
   int tag = 0;
   String status;
   List<String> options = [
@@ -27,7 +68,9 @@ class _HomeScreenState extends State<HomeScreen> {
     'Delivered',
   ];
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     // FirebaseAuth.instance.signOut();
 
     return Scaffold(
@@ -57,6 +100,42 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         centerTitle: true,
       ),
+      // drawer: Drawer(
+      //   child: ListView(
+      //     padding: EdgeInsets.zero,
+      //     children: [
+      //       DrawerHeader(
+      //         decoration: BoxDecoration(
+      //           color: Colors.teal,
+      //         ),
+      //         child: Text(
+      //           'DeliveryMan Profile',
+      //           style: TextStyle(
+      //             color: Colors.white,
+      //             fontSize: 24,
+      //           ),
+      //         ),
+      //       ),
+      //       ListTile(
+      //         leading: Icon(Icons.message),
+      //         title: Text(
+      //           'flutter'
+      //           //vendorData.data()['email']
+      //           // _customer.data()['deliveryboy']['name'],
+      //           // _customer.data()['deliveryboy']['name'],
+      //         ),
+      //       ),
+      //       ListTile(
+      //         leading: Icon(Icons.account_circle),
+      //         title: Text('Profile'),
+      //       ),
+      //       ListTile(
+      //         leading: Icon(Icons.settings),
+      //         title: Text('Settings'),
+      //       ),
+      //     ],
+      //   ),
+      // ),
       body: Column(
         children: [
           Container(
@@ -85,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Container(
             child: StreamBuilder<QuerySnapshot>(
               stream: _services.orders
-                  .where('deliveryboy.phone', isEqualTo: _user.phoneNumber)
+                  .where('deliveryboy.uid', isEqualTo: _user.uid)
                   // .where('deliveryboy.email', isEqualTo: _user.email)
                   .where('orderStatus', isEqualTo: tag == 0 ? null : status)
                   //

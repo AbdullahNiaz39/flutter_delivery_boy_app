@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_delivery_boy_app/providers/auth_provider.dart';
+import 'package:flutter_delivery_boy_app/providers/order_provider.dart';
 import 'package:flutter_delivery_boy_app/screens/forget_password_screen.dart';
 import 'package:flutter_delivery_boy_app/screens/home_screen.dart';
 import 'package:flutter_delivery_boy_app/screens/login_screen.dart';
@@ -17,6 +19,7 @@ void main() async {
     MultiProvider(
       providers: [
         Provider(create: (_) => AuthProvider()),
+        Provider(create: (_) => OrderProvider()),
       ],
       child: MyApp(),
     ),
@@ -24,7 +27,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
